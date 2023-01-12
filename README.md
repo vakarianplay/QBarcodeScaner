@@ -1,0 +1,2 @@
+# QBarcodeScaner
+QT Barcode scaner
