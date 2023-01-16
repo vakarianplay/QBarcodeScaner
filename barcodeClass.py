@@ -3,18 +3,28 @@ import cv2
 
 
 def decode(image):
+    global recognizeType
+    global recognizeData
+    recognizeData = []
+    recognizeType = []
     # decodes all barcodes from an image
     decoded_objects = pyzbar.decode(image)
-    for obj in decoded_objects:
-        # draw the barcode
-        print("detected barcode:", obj)
-        image = draw_barcode(obj, image)
-        # print barcode type & data
-        print("Type:", obj.type)
-        print("Data:", obj.data)
-        print()
+    if len(decoded_objects) > 0:
+        print(len(decoded_objects))
+        for obj in decoded_objects:
+            # draw the barcode
+            # print("detected barcode:", obj)
+            image = draw_barcode(obj, image)
+            # print barcode type & data
+            # recognizeType = obj.type
+            recognizeData.append(obj.data)
+            recognizeType.append(obj.type)
 
-    return image
+        return image
+    else:
+        print("nodata")
+        recognizeType = ""
+        recognizeData = ""
 
 
 def draw_barcode(decoded, image):
@@ -28,28 +38,37 @@ def draw_barcode(decoded, image):
                             thickness=5)
     return image
 
+def getData():
+    return recognizeData
+
+def getType():
+    return recognizeType
 
 def init(pathToFile):
     print ("barcode class")
     print(pathToFile)
-    global var
-    var = "test var"
+    img = cv2.imread(pathToFile)
+    img = decode(img)
+    # cv2.imshow("img", img)
+    # cv2.imwrite("barcode_detected.png", img)
+    # cv2.waitKey(0)
 
-def dd():
-    return var
 
 if __name__ == "__main__":
-    from glob import glob
-
-
-    barcodes = glob("*.jpg")
-    for barcode_file in barcodes:
+    print("lib")
+    # from glob import glob
+    #
+    #
+    # barcodes = glob("*.jpg")
+    # for barcode_file in barcodes:
         # load the image to opencv
-        img = cv2.imread(barcode_file)
-        # decode detected barcodes & get the image
-        # that is drawn
-        img = decode(img)
-        # show the image
-        #cv2.imshow("img", img)
+        # barcode_file = "E:/Python code/PyBarcode/bar.png"
+        # init(barcode_file)
+        # img = cv2.imread(barcode_file)
+        # # decode detected barcodes & get the image
+        # # that is drawn
+        # img = decode(img)
+        # # show the image
+        # cv2.imshow("img", img)
         # cv2.imwrite("barcode_detected.png", img)
-        #cv2.waitKey(0)
+        # cv2.waitKey(0)

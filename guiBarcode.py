@@ -21,9 +21,17 @@ class MainClass():
         linePath.setText(barcodeFile[0])
         ImgDraw(barcodeFile[0])
         barcodeClass.init(barcodeFile[0])
+        print(barcodeClass.getType())
+        print(barcodeClass.getData())
 
+        if len(barcodeClass.getType()) > 0:
+            textResult.append("Type: " + barcodeClass.getType()[0] + "\nData: " + barcodeClass.getData()[0].decode("utf-8") + "\n__________________\n")
+        else:
+            textResult.setPlainText("No data recognized")
 
-
+            #TODO
+            #add cycle for all arrays's elements
+        # print(barcodeClass.recognize()[0].decode("utf-8"))
 
 
 
@@ -37,7 +45,8 @@ class ImgDraw:
 
     def __showResult(self):
         textResult.setHidden(False)
-
+        # textResult.setPlainText("Type: " + barcodeClass.recognize()[1] + "\nData: " + barcodeClass.recognize()[0].decode("utf-8") + "\n__________________")
+        # print(barcodeClass.recognize()[0].decode("utf-8"))
 
 
 class Window(QMainWindow):
