@@ -11,27 +11,32 @@ import qdarktheme
 import sys
 
 
-class MainClass:
+class MainClass():
 
     def __init__(self):
         print("MainClass")
 
-
     def fileOpen(self):
         barcodeFile = QFileDialog.getOpenFileName(None, 'Open File', './', "Image (*.png *.jpg *jpeg)")
         linePath.setText(barcodeFile[0])
-        barcodeClass.init(barcodeFile[0])
         ImgDraw(barcodeFile[0])
+        barcodeClass.init(barcodeFile[0])
+
+
+
 
 
 
 class ImgDraw:
     def __init__(self, imgpath):
-        print(imgpath)
+        # print(imgpath)
         pixmap = QPixmap(imgpath)
         spix = pixmap.scaledToHeight(380)
         imgLabel.setPixmap(spix)
+        self.__showResult()
 
+    def __showResult(self):
+        textResult.setHidden(False)
 
 
 
@@ -41,10 +46,12 @@ class Window(QMainWindow):
         super().__init__()
         self.__initUi()
 
+
     def __initUi(self):
         buttonPath = QPushButton("  Browse ...  ", self)
         global linePath
         global imgLabel
+        global lay
         imgLabel = QLabel(self)
         imgLabel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         imgLabel.setAlignment(Qt.AlignCenter)
@@ -68,17 +75,25 @@ class Window(QMainWindow):
         mainWidget.setLayout(lay)
         self.setCentralWidget(mainWidget)
 
+        self.barcodeResults()
+        textResult.setHidden(True)
+
+    def barcodeResults(self):
+        global textResult
+        textResult = QTextEdit()
+        textResult.setMinimumHeight(100)
+        textResult.setMaximumHeight(100)
+        lay.addWidget(textResult)
+
+
 
 if __name__ == "__main__":
     app = QApplication([])
     app.setStyleSheet(qdarktheme.load_stylesheet())
     # linePath = QLineEdit()
-
-
     # barcode = barcodeClass()
     main = MainClass()
     widget = Window()
-
     widget.show()
     widget.resize(600, 400)
     sys.exit(app.exec_())

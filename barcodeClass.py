@@ -32,6 +32,11 @@ def draw_barcode(decoded, image):
 def init(pathToFile):
     print ("barcode class")
     print(pathToFile)
+    global var
+    var = "test var"
+
+def dd():
+    return var
 
 if __name__ == "__main__":
     from glob import glob
