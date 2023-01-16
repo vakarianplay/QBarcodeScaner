@@ -50,7 +50,7 @@ def init(pathToFile):
     img = cv2.imread(pathToFile)
     img = decode(img)
     # cv2.imshow("img", img)
-    # cv2.imwrite("barcode_detected.png", img)
+    cv2.imwrite("barcode_detected.png", img)
     # cv2.waitKey(0)
 
 
