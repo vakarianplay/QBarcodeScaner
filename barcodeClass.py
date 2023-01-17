@@ -1,5 +1,6 @@
 from pyzbar import pyzbar
 import cv2
+import os
 
 
 def decode(image):
@@ -50,12 +51,15 @@ def init(pathToFile):
     img = cv2.imread(pathToFile)
     img = decode(img)
     # cv2.imshow("img", img)
-    cv2.imwrite("barcode_detected.png", img)
+    dir = os.path.abspath(os.curdir)
+    cv2.imwrite(dir + "/barcode_detected.png", img)
     # cv2.waitKey(0)
 
 
 if __name__ == "__main__":
     print("lib")
+    # dir = os.path.abspath(os.curdir)
+    # print(dir)
     # from glob import glob
     #
     #
