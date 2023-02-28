@@ -1,7 +1,3 @@
-# from PyQt5.QtWidgets import QMainWindow, QApplication, QHBoxLayout, QVBoxLayout, QWidget, QTextEdit, QLineEdit, QPushButton, QFileDialog, QLabel
-# from PyQt5.QtGui import QPainter, QColor, QPen, QPixmap
-# from PyQt5.QtCore import Qt
-
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -9,6 +5,7 @@ from PyQt5.QtCore import *
 import barcodeClass
 import qdarktheme
 import sys
+import os
 
 
 class MainClass():
@@ -17,6 +14,7 @@ class MainClass():
         print("MainClass")
 
     def fileOpen(self):
+        textResult.clear()
         barcodeFile = QFileDialog.getOpenFileName(None, 'Open File', './', "Image (*.png *.jpg *jpeg)")
         linePath.setText(barcodeFile[0])
         ImgDraw(barcodeFile[0])
@@ -25,21 +23,13 @@ class MainClass():
         print(barcodeClass.getData())
 
         if len(barcodeClass.getType()) > 0:
-            #textResult.append("Type: " + barcodeClass.getType()[0] + "\nData: " + barcodeClass.getData()[0].decode("utf-8") + "\n__________________\n")
+            dir = os.path.abspath(os.curdir)
+            ImgDraw(dir + "/barcode_detected.png")
             for position in enumerate(barcodeClass.getType()):
                 print(position[0])
-
-
+                textResult.append("Type: " + barcodeClass.getType()[position[0]] + "\nData: " + barcodeClass.getData()[position[0]].decode("utf-8") + "\n__________________\n")
         else:
             textResult.setPlainText("No data recognized")
-
-            #TODO
-            #add cycle for all arrays's elements
-
-        def appendResult(position):
-            textResult.append("Type: " + barcodeClass.getType()[position] + "\nData: " + barcodeClass.getData()[position].decode("utf-8") + "\n__________________\n")
-
-
 
 
 class ImgDraw:
@@ -52,8 +42,7 @@ class ImgDraw:
 
     def __showResult(self):
         textResult.setHidden(False)
-        # textResult.setPlainText("Type: " + barcodeClass.recognize()[1] + "\nData: " + barcodeClass.recognize()[0].decode("utf-8") + "\n__________________")
-        # print(barcodeClass.recognize()[0].decode("utf-8"))
+
 
 
 class Window(QMainWindow):
@@ -104,6 +93,7 @@ class Window(QMainWindow):
 
 
 if __name__ == "__main__":
+
     app = QApplication([])
     app.setStyleSheet(qdarktheme.load_stylesheet())
     # linePath = QLineEdit()

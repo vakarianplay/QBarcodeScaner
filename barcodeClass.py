@@ -11,7 +11,6 @@ def decode(image):
     # decodes all barcodes from an image
     decoded_objects = pyzbar.decode(image)
     if len(decoded_objects) > 0:
-        print(len(decoded_objects))
         for obj in decoded_objects:
             # draw the barcode
             # print("detected barcode:", obj)
@@ -37,6 +36,9 @@ def draw_barcode(decoded, image):
                             (decoded.rect.left + decoded.rect.width, decoded.rect.top + decoded.rect.height),
                             color=(0, 255, 0),
                             thickness=5)
+    dir = os.path.abspath(os.curdir)
+    cv2.imwrite(dir + "/barcode_detected.png", image)
+
     return image
 
 def getData():
@@ -50,19 +52,13 @@ def init(pathToFile):
     print(pathToFile)
     img = cv2.imread(pathToFile)
     img = decode(img)
-    # cv2.imshow("img", img)
-    dir = os.path.abspath(os.curdir)
-    cv2.imwrite(dir + "/barcode_detected.png", img)
+    #dir = os.path.abspath(os.curdir)
+    #cv2.imwrite(dir + "/barcode_detected.png", img)
     # cv2.waitKey(0)
-
 
 if __name__ == "__main__":
     print("lib")
-    # dir = os.path.abspath(os.curdir)
-    # print(dir)
     # from glob import glob
-    #
-    #
     # barcodes = glob("*.jpg")
     # for barcode_file in barcodes:
         # load the image to opencv
