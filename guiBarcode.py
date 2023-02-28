@@ -25,13 +25,20 @@ class MainClass():
         print(barcodeClass.getData())
 
         if len(barcodeClass.getType()) > 0:
-            textResult.append("Type: " + barcodeClass.getType()[0] + "\nData: " + barcodeClass.getData()[0].decode("utf-8") + "\n__________________\n")
+            #textResult.append("Type: " + barcodeClass.getType()[0] + "\nData: " + barcodeClass.getData()[0].decode("utf-8") + "\n__________________\n")
+            for position in enumerate(barcodeClass.getType()):
+                print(position[0])
+
+
         else:
             textResult.setPlainText("No data recognized")
 
             #TODO
             #add cycle for all arrays's elements
-        # print(barcodeClass.recognize()[0].decode("utf-8"))
+
+        def appendResult(position):
+            textResult.append("Type: " + barcodeClass.getType()[position] + "\nData: " + barcodeClass.getData()[position].decode("utf-8") + "\n__________________\n")
+
 
 
 
