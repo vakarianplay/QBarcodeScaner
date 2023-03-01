@@ -2,7 +2,6 @@ from pyzbar import pyzbar
 import cv2
 import os
 
-
 def decode(image):
     global recognizeType
     global recognizeData
@@ -19,7 +18,6 @@ def decode(image):
             # recognizeType = obj.type
             recognizeData.append(obj.data)
             recognizeType.append(obj.type)
-
         return image
     else:
         print("nodata")
@@ -38,7 +36,6 @@ def draw_barcode(decoded, image):
                             thickness=5)
     dir = os.path.abspath(os.curdir)
     cv2.imwrite(dir + "/barcode_detected.png", image)
-
     return image
 
 def getData():
@@ -52,12 +49,9 @@ def init(pathToFile):
     print(pathToFile)
     img = cv2.imread(pathToFile)
     img = decode(img)
-    #dir = os.path.abspath(os.curdir)
-    #cv2.imwrite(dir + "/barcode_detected.png", img)
-    # cv2.waitKey(0)
 
 if __name__ == "__main__":
-    print("lib")
+    print("this is library")
     # from glob import glob
     # barcodes = glob("*.jpg")
     # for barcode_file in barcodes:
