@@ -16,11 +16,14 @@ class MainClass():
     def fileOpen(self):
         textResult.clear()
         barcodeFile = QFileDialog.getOpenFileName(None, 'Open File', './', "Image (*.png *.jpg *jpeg)")
-        linePath.setText(barcodeFile[0])
-        ImgDraw(barcodeFile[0])
-        barcodeClass.init(barcodeFile[0])
-        print(barcodeClass.getType())
-        print(barcodeClass.getData())
+        try:
+            linePath.setText(barcodeFile[0])
+            ImgDraw(barcodeFile[0])
+            barcodeClass.init(barcodeFile[0])
+            print(barcodeClass.getType())
+            print(barcodeClass.getData())
+        except:
+            imgLabel.setText("Load barcode image")
 
         if len(barcodeClass.getType()) > 0:
             dir = os.path.abspath(os.curdir)
