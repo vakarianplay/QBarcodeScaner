@@ -37,7 +37,6 @@ class MainClass():
 
 class ImgDraw:
     def __init__(self, imgpath):
-        # print(imgpath)
         pixmap = QPixmap(imgpath)
         spix = pixmap.scaledToHeight(380)
         imgLabel.setPixmap(spix)
@@ -53,7 +52,6 @@ class Window(QMainWindow):
     def __init__(self):
         super().__init__()
         self.__initUi()
-
 
     def __initUi(self):
         buttonPath = QPushButton("  Browse ...  ", self)
@@ -99,8 +97,6 @@ if __name__ == "__main__":
 
     app = QApplication([])
     app.setStyleSheet(qdarktheme.load_stylesheet())
-    # linePath = QLineEdit()
-    # barcode = barcodeClass()
     main = MainClass()
     widget = Window()
     widget.show()
