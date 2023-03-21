@@ -11,7 +11,7 @@ import os
 class MainClass():
 
     def __init__(self):
-        print("MainClass")
+        print("Init main class")
 
     def fileOpen(self):
         textResult.clear()
@@ -44,7 +44,6 @@ class ImgDraw:
 
     def __showResult(self):
         textResult.setHidden(False)
-
 
 
 class Window(QMainWindow):
