@@ -23,7 +23,6 @@ def decode(image):
         recognizeType = ""
         recognizeData = ""
 
-
 def draw_barcode(decoded, image):
     # n_points = len(decoded.polygon)
     # for i in range(n_points):
